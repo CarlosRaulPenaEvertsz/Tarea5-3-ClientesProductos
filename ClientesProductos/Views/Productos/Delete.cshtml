@@ -1,0 +1,77 @@
+﻿@model ClientesProductos.Models.Producto
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+
+<h3>Está Seguro de Eliminar Este Producto?</h3>
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.ImageUrl)*@
+            @Html.Label("Imagen")
+        </dt>
+        <dd>
+
+            @{
+                var imagePath = "/imagenes/" + Model.ImageUrl;
+            }
+            <img src="@imagePath" class="img-rounded" alt="No IMG" width="100" height="70" />
+        </dd>
+
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Producto1)*@
+            @Html.Label("Código")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Producto1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.Precio)*@
+            @String.Format("{0:C2}", Model.Precio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CantExistencia)
+        </dt>
+
+        <dd>
+            @String.Format("{0:N0}", Model.CantExistencia)
+            @*@Html.DisplayFor(model => model.CantExistencia)*@
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+            @Html.ActionLink("Volver Al Listado", "Index", "Productos", null, new { @class = "btn btn-success" })
+        </div>
+    }
+</div>
+
+

@@ -1,0 +1,79 @@
+﻿@model ClientesProductos.Models.Producto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @*@Html.DisplayNameFor(model => model.ImageUrl)*@
+            @Html.Label("Imagen")
+        </dt>
+        <dd>
+            @*@Html.DisplayFor(model => model.ImageUrl)*@
+            @{
+                var imagePath = "/imagenes/" + Model.ImageUrl;
+            }
+            <img src="@imagePath" class="img-rounded" alt="No IMG" width="100" height="70" />
+        </dd>
+
+        <dt>
+            @*@Html.DisplayNameFor(model => model.Producto1)*@
+            @Html.Label("Código")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Producto1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Precio)
+        </dt>
+        <dd>
+            @String.Format("{0:C2}", Model.Precio)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CantExistencia)
+        </dt>
+        <dd>
+            @String.Format("{0:N0}", Model.CantExistencia)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.CantExistencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CantExistencia)
+        </dd>*@
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageUrl)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    <a href="/Productos/Edit?id=@Model.ProductoId" class="btn btn-success">Modificar Datos</a>
+    @Html.ActionLink("Volver al Listado", "Index", "Productos", null, new { @class = "btn btn-success" })
+</p>
+
+
+

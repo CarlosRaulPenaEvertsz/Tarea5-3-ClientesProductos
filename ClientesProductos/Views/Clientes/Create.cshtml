@@ -1,0 +1,113 @@
+﻿@model ClientesProductos.Models.Cliente
+
+@{
+                /**/
+
+                ViewBag.Title = "Registro Clientes";
+}
+
+<h2>Clientes</h2>
+<head>
+    <style>
+        .linkbtnfull {
+            background-color: greenyellow;
+            /*#f44336;*/
+            color: black;
+            font-size: medium;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        table {
+            font-family: Arial,sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: palegreen;
+        }
+    </style>
+</head>
+
+
+@using (Html.BeginForm("FileUpload", "Clientes", FormMethod.Post,
+    new { enctype = "multipart/form-data" }))
+
+{
+    @Html.AntiForgeryToken()
+    <table>
+
+        <tbody>
+            <tr>
+                <td style="text-align:center;background-color:cornflowerblue;color:white;font-family:Arial;font-style:oblique;font-size:x-large">
+                    Registro de Clientes
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBox("Nombres", "", "", new { placeholder = "Digite su Nombre..." })
+                    @Html.ValidationMessage("Nombres", "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBox("Apellidos", "", "", new { placeholder = "Digite sus Apellidos..." })
+                    @Html.ValidationMessage("Apellidos", "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBox("Direccion", "", "", new { placeholder = "Digite su Dirección..." })
+                    @Html.ValidationMessage("Direccion", "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBox("Email", "", "", new { placeholder = "Digite su Email..." })
+                    @Html.ValidationMessage("Email", "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBox("Telefono", "", "", new { placeholder = "Digite su Teléfono..." })
+                    @Html.ValidationMessage("Telefono", "", new { @class = "text-danger" })
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @Html.TextBox("Movil", "", "", new { placeholder = "Digite su Celular..." })
+                    @Html.ValidationMessage("MOvil", "", new { @class = "text-danger" })
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    <input type="file" name="file" id="file" class="btn btn-danger btn-outlined" /><div class="text-danger">@TempData["ErrorFoto"]</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" class="btn btn-success" value="Registrar Cliente" />
+                    @Html.ActionLink("Volver Al Listado", "Index", "Clientes", null, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+}
+
+
+
+
+

@@ -1,0 +1,116 @@
+﻿@using ClientesProductos.Models
+
+@{
+                /**/
+
+                ViewBag.Title = "Detalle Clientes";
+}
+
+<h2>Detalle</h2>
+
+<head>
+    <style>
+        .linkbtnfull {
+            background-color: lawngreen;
+            color: black;
+            font-size: medium;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        table {
+            font-family: Arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: palegreen;
+        }
+    </style>
+</head>
+@{
+    ClientesProductosDBEntities db = new ClientesProductosDBEntities();
+
+}
+
+<body>
+    <h2 style="background-color: black; color: white; text-align: center; font-style: oblique;">
+        Detalle de Clientes
+    </h2>
+    <p>
+        <div class="row">
+            <div class="col-sm-2">
+                @Html.ActionLink("Crear Cliente Nuevo", "Create", new { controller = "Clientes" }, new { @class = "btn btn-success" })
+            </div>
+            <div class="col-sm-2">
+                <input class="form-control" id="input_search" name="search" type="text" placeholder="Buscar Cliente..." />
+            </div>
+        </div>
+    </p>
+
+    @using (Html.BeginForm())
+    {
+
+        <div class="well" id="cuerpolistado">
+            <table align="center" border="=" 1" cellpadding="4" cellspacing="4">
+                <thead>
+                    <tr>
+                        <th style="background-color: black; color: white;">Foto</th>
+                        <th style="background-color: black; color: white;">Nombres</th>
+                        <th style="background-color: black; color: white;">Apellidos</th>
+                        <th style="background-color: black; color: white;">Dirección</th>
+                        <th style="background-color: black; color: white;">Teléfono</th>
+                        <th style="background-color: black; color: white;">Celular</th>
+                        <th style="background-color: black; color: white;">Email</th>
+                        <th style="background-color: black; color: white;">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in db.Clientes)
+                    {
+                        <tr>
+                            <td>
+                                <img src="~/imagenes/@item.ImageUrl" class="img-rounded" alt="No IMG" width="100" height="70" />
+                            </td>
+                            <td>@item.Nombres</td>
+                            <td>@item.Apellidos</td>
+                            <td>@item.Direccion</td>
+                            <td>@item.Telefono</td>
+                            <td>@item.Movil</td>
+                            <td>@item.Email</td>
+                            <td>
+                                @Html.Raw("<a data-modal='' href='/Clientes/Edit/" + item.ClienteId + "' id='" + item.ClienteId + "' title='Modificar'> <span class='glyphicon glyphicon-edit'> </span> <a/>")
+                                @Html.Raw("<a data-modal='' href='/Clientes/Details/" + item.ClienteId + "' id='" + item.ClienteId + "' title='Detalles'> <span class='glyphicon glyphicon-th-list'> </span> <a/>")
+                                @Html.Raw("<a data-modal='' href='/Clientes/Delete/" + item.ClienteId + "' id='" + item.ClienteId + "' title='Eliminar'> <span class='glyphicon glyphicon-trash'> </span> <a/>")
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</body>
+
+@section scripts{
+    <script>
+                $(document).ready(function () {
+                    $("#input_search").on("keyup", function () {
+                        var value = $(this).val().toLowerCase();
+                        $("#cuerpolistado tr").filter(function () {
+                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                        });
+                    });
+                });
+    </script>
+}
+
+

@@ -1,0 +1,95 @@
+﻿@model ClientesProductos.Models.Producto
+
+@{
+    /**/
+
+    ViewBag.Title = "Registro Productos";
+}
+
+<h2>Productos</h2>
+<head>
+    <style>
+        .linkbtnfull {
+            background-color: greenyellow;
+            /*#f44336;*/
+            color: black;
+            font-size: medium;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        table {
+            font-family: Arial,sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: palegreen;
+        }
+    </style>
+</head>
+
+
+@using (Html.BeginForm("FileUpload", "Productos", FormMethod.Post,
+    new { enctype = "multipart/form-data" }))
+
+{
+    @Html.AntiForgeryToken()
+    <table>
+
+        <tbody>
+            <tr>
+                <td style="text-align:center;background-color:cornflowerblue;color:white;font-family:Arial;font-style:oblique;font-size:x-large">
+                    Registro de Productos
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBox("Producto1", "", "", new { placeholder = "Digite Cod. Prod." })
+                    @Html.ValidationMessage("Producto1", "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBox("Descripcion", "", "", new { placeholder = "Digite Descrip. Prod..." })
+                    @Html.ValidationMessage("Descripcion", "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBox("Precio", "", "", new { placeholder = "Digite Precio Prod...." })
+                    @Html.ValidationMessage("Precio", "", new { @class = "text-danger" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBox("CantExistencia", "", "", new { placeholder = "Digite Cant. Existencia.." })
+                    @Html.ValidationMessage("CantExistencia", "", new { @class = "text-danger" })
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="file" name="file" id="file" class="btn btn-danger btn-outlined" /><div class="text-danger">@TempData["ErrorFoto"]</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" class="btn btn-success" value="Registrar Producto" />
+                    @Html.ActionLink("Volver Al Listado", "Index", "Productos", null, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+}
+
